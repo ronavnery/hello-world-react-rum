@@ -1,6 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
+CoralogixRum.setLabels({
+  paymentMethod: 'visa',
+  userTheme: 'black'
+  // ...
+})
+
 function HomePage() {
   const navigate = useNavigate();
 
@@ -9,7 +15,6 @@ function HomePage() {
       firstFunction();
     } catch (error) {
       console.error("Caught an error:", error);
-      throw error; // Re-throw the error to allow for a more detailed stack trace
     }
   };
 
