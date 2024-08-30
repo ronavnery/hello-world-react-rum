@@ -1,24 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+
+function HomePage() {
+  const navigate = useNavigate();
+
+  const generateError = () => {
+    try {
+      firstFunction();
+    } catch (error) {
+      console.error("Caught an error:", error);
+      throw error; // Re-throw the error to allow for a more detailed stack trace
+    }
+  };
+
+  const firstFunction = () => {
+    secondFunction();
+  };
+
+  const secondFunction = () => {
+    thirdFunction();
+  };
+
+  const thirdFunction = () => {
+    fourthFunction();
+  };
+
+  const fourthFunction = () => {
+    fifthFunction();
+  };
+
+  const fifthFunction = () => {
+    console.log('About to throw an error in fifthFunction.');
+    throw new Error('This is a manually generated error in fifthFunction for testing.');
+  };
+
+  return (
+    <div>
+      <h1>Hello World - Home Page</h1>
+      <button onClick={() => navigate('/about')}>Go to About Page</button>
+      <button onClick={generateError}>Generate Error</button>
+    </div>
+  );
+}
+
+function AboutPage() {
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <h1>About Page</h1>
+      <button onClick={() => navigate('/')}>Go to Home Page</button>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
+    </Router>
   );
 }
 
