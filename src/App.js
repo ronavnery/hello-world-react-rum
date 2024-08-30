@@ -1,12 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
-CoralogixRum.setLabels({
-  paymentMethod: 'visa',
-  userTheme: 'black'
-  // ...
-})
-
 function HomePage() {
   const navigate = useNavigate();
 
